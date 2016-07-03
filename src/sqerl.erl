@@ -299,6 +299,12 @@ extra_clause({limit, Num}, _Safe) ->
     [<<" LIMIT ">>, encode(Num)];
 extra_clause({limit, Offset, Num}, _Safe) ->
     [<<" LIMIT ">>, encode(Offset), <<", ">> , encode(Num)];
+
+extra_clause({offset, Num}, _Safe) ->
+    [<<" OFFSET ">>, encode(Num)];
+extra_clause({offset, Offset, Num}, _Safe) ->
+    [<<" OFFSET ">>, encode(Offset), <<", ">> , encode(Num)];
+
 extra_clause({group_by, ColNames}, _Safe) ->
     [<<" GROUP BY ">>, make_list(ColNames, fun convert/1)];
 extra_clause({group_by, ColNames, having, Expr}, Safe) ->
